@@ -13,7 +13,7 @@ CookieGenie blocks cookie and script domains.
 ### Description
 
 With CookieGenie you can ask the visitor for permission before placing cookies.  
-It uses the Yett library (https://github.com/elbywan/yett) to block loading scripts from the domains you supply in the settings.
+It uses the Yett library (https://github.com/elbywan/yett) to prevent loading scripts from the domains you supply in the settings.
 
 ### Installation
 
