@@ -1,0 +1,108 @@
+# Copyright (C) 2014 CookieGenie
+# This file is distributed under the same license as the CookieGenie package.
+msgid ""
+msgstr ""
+"Project-Id-Version: CookieGenie 1.0\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/WordPress-Plugin-Template\n"
+"POT-Creation-Date: 2014-04-07 11:28:06+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2014-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+
+#: includes/class-cookiegenie-settings.php:427
+msgid "Save Settings"
+msgstr ""
+
+#. Plugin Name of the plugin/theme
+msgid "CookieGenie"
+msgstr ""
+
+msgid "Only necessary cookies"
+msgstr ""
+
+msgid "Allow all cookies"
+msgstr ""
+
+msgid "Read more"
+msgstr ""
+
+msgid "CookieGenie settings"
+msgstr ""
+
+msgid "Enable CookieBanner?"
+msgstr ""
+
+msgid "Display CookieGenie CookieBanner?"
+msgstr ""
+
+msgid "Disabled"
+msgstr ""
+
+msgid "Enabled"
+msgstr ""
+
+msgid "Blacklist domains"
+msgstr ""
+
+msgid "Cookie and scripts domains to block. One per line"
+msgstr ""
+
+msgid "Whitelist domains"
+msgstr ""
+
+msgid "Cookie and scripts domains to allow. One per line"
+msgstr ""
+
+msgid "Cookie banner title"
+msgstr ""
+
+msgid "Cookie banner text"
+msgstr ""
+
+msgid "Cookie declaration URL"
+msgstr ""
+
+msgid "Set Cookie expire time"
+msgstr ""
+
+msgid "Select days before we ask for consent again"
+msgstr ""
+
+msgid "30 days"
+msgstr ""
+
+msgid "90 days"
+msgstr ""
+
+msgid "365 days"
+msgstr ""
+
+msgid "Style"
+msgstr ""
+
+msgid "Banner background color"
+msgstr ""
+
+msgid "Choose a color"
+msgstr ""
+
+msgid "Content color"
+msgstr ""
+
+msgid "API"
+msgstr ""
+
+msgid "API Key"
+msgstr ""
+
+msgid "Get your API key at https://www.graphicgenie.nl/cookiegenie"
+msgstr ""
+
+msgid "Your API key"
+msgstr ""
+
+msgid ""
+msgstr ""
