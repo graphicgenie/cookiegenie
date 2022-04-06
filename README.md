@@ -1,5 +1,5 @@
 
-#CookieGenie
+# CookieGenie
 Contributors: Ronald Gerssen  
 Tags: wordpress, plugin, template  
 Requires at least: 5.0  
@@ -10,11 +10,11 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 CookieGenie block cookie and script domains
 
-###Description
+### Description
 
 With CookieGenie you can ask the visitor for permission before placing cookies. It entirely blocks the domains you set from loading.
 
-###Installation
+### Installation
 
 Installing "CookieGenie" can be done either by searching for "CookieGenie" via the "Plugins > Add New" screen in your WordPress dashboard, or by using the following steps:
 
@@ -22,7 +22,7 @@ Installing "CookieGenie" can be done either by searching for "CookieGenie" via t
 1. Upload the ZIP file through the 'Plugins > Add New > Upload' screen in your WordPress dashboard
 1. Activate the plugin through the 'Plugins' menu in WordPress
 
-#####Changelog
+##### Changelog
 * 1.0.0
 * 2022-04-06
 * Initial release
