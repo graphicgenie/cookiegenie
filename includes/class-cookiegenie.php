@@ -350,7 +350,7 @@ class CookieGenie {
         update_option('cg_scn_color', '#FFFFFF');
 
         if (!wp_next_scheduled('cg_update_lists'))
-            wp_schedule_event(time(), 'every_minute', 'cg_update_lists');
+            wp_schedule_event(time(), 'hourly', 'cg_update_lists');
 
     }//end install()
 
