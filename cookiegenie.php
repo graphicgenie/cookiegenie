@@ -6,8 +6,8 @@
  * Description: Ask user for permission before loading analytics and tracking scripts and cookies.
  * Author: Ronald Gerssen - GraphicGenie
  * Author URI: https://www.graphicgenie.nl
- * Requires at least: 5.0
- * Tested up to: 5.9.2
+ * Requires at least: 5.9.3
+ * Tested up to: 5.9.3
  *
  * Text Domain: cookiegenie
  * Domain Path: /lang/

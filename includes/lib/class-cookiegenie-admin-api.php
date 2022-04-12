@@ -82,7 +82,7 @@ class CookieGenie_Admin_API {
 			case 'text':
 			case 'url':
 			case 'email':
-				$html .= '<input id="' . esc_attr( $field['id'] ) . '" type="text" name="' . esc_attr( $option_name ) . '" placeholder="' . esc_attr( $field['placeholder'] ) . '" value="' . esc_attr( $data ) . '" />' . "\n";
+				$html .= '<input id="' . $field['id'] . '" type="text" name="' . $option_name . '" placeholder="' . $field['placeholder'] . '" value="' . $data . '" />' . "\n";
 				break;
 
 			case 'password':
@@ -90,22 +90,22 @@ class CookieGenie_Admin_API {
 			case 'hidden':
 				$min = '';
 				if ( isset( $field['min'] ) ) {
-					$min = ' min="' . esc_attr( $field['min'] ) . '"';
+					$min = ' min="' . $field['min'] . '"';
 				}
 
 				$max = '';
 				if ( isset( $field['max'] ) ) {
-					$max = ' max="' . esc_attr( $field['max'] ) . '"';
+					$max = ' max="' . $field['max'] . '"';
 				}
-				$html .= '<input id="' . esc_attr( $field['id'] ) . '" type="' . esc_attr( $field['type'] ) . '" name="' . esc_attr( $option_name ) . '" placeholder="' . esc_attr( $field['placeholder'] ) . '" value="' . esc_attr( $data ) . '"' . $min . '' . $max . '/>' . "\n";
+				$html .= '<input id="' . $field['id'] . '" type="' . $field['type'] . '" name="' . $option_name . '" placeholder="' . $field['placeholder']. '" value="' . $data . '"' . $min . '' . $max . '/>' . "\n";
 				break;
 
 			case 'text_secret':
-				$html .= '<input id="' . esc_attr( $field['id'] ) . '" type="text" name="' . esc_attr( $option_name ) . '" placeholder="' . esc_attr( $field['placeholder'] ) . '" value="" />' . "\n";
+				$html .= '<input id="' . $field['id'] . '" type="text" name="' . $option_name . '" placeholder="' . $field['placeholder'] . '" value="" />' . "\n";
 				break;
 
 			case 'textarea':
-				$html .= '<textarea id="' . esc_attr( $field['id'] ) . '" rows="5" cols="50" name="' . esc_attr( $option_name ) . '" placeholder="' . esc_attr( $field['placeholder'] ) . '">' . $data . '</textarea><br/>' . "\n";
+				$html .= '<textarea id="' . $field['id'] . '" rows="5" cols="50" ' . disabled($this->disabled($field['id']), true, false) . ' name="' . $option_name . '" placeholder="' . $field['placeholder'] . '">' . $data . '</textarea><br/>' . "\n";
 				break;
 
 			case 'checkbox':
@@ -113,7 +113,7 @@ class CookieGenie_Admin_API {
 				if ( $data && 'on' === $data ) {
 					$checked = 'checked="checked"';
 				}
-				$html .= '<input id="' . esc_attr( $field['id'] ) . '" type="' . esc_attr( $field['type'] ) . '" name="' . esc_attr( $option_name ) . '" ' . $checked . '/>' . "\n";
+				$html .= '<input id="' . $field['id'] . '" type="' . $field['type'] . '" name="' . $option_name . '" ' . $checked . '/>' . "\n";
 				break;
 
 			case 'checkbox_multi':
@@ -122,7 +122,7 @@ class CookieGenie_Admin_API {
 					if ( in_array( $k, (array) $data, true ) ) {
 						$checked = true;
 					}
-					$html .= '<p><label for="' . esc_attr( $field['id'] . '_' . $k ) . '" class="checkbox_multi"><input type="checkbox" ' . checked( $checked, true, false ) . ' name="' . esc_attr( $option_name ) . '[]" value="' . esc_attr( $k ) . '" id="' . esc_attr( $field['id'] . '_' . $k ) . '" /> ' . $v . '</label></p> ';
+					$html .= '<p><label for="' . $field['id'] . '_' . $k . '" class="checkbox_multi"><input type="checkbox" ' . checked( $checked, true, false ) . ' name="' . $option_name . '[]" value="' . $k . '" id="' . $field['id'] . '_' . $k . '" /> ' . $v . '</label></p> ';
 				}
 				break;
 
@@ -132,30 +132,30 @@ class CookieGenie_Admin_API {
 					if ( $k === $data ) {
 						$checked = true;
 					}
-					$html .= '<label for="' . esc_attr( $field['id'] . '_' . $k ) . '"><input type="radio" ' . checked( $checked, true, false ) . ' name="' . esc_attr( $option_name ) . '" value="' . esc_attr( $k ) . '" id="' . esc_attr( $field['id'] . '_' . $k ) . '" /> ' . $v . '</label> ';
+					$html .= '<label for="' . $field['id'] . '_' . $k . '"><input type="radio" ' . checked( $checked, true, false ) . ' name="' . $option_name . '" value="' . $k . '" id="' . $field['id'] . '_' . $k . '" /> ' . $v . '</label> ';
 				}
 				break;
 
 			case 'select':
-				$html .= '<select name="' . esc_attr( $option_name ) . '" id="' . esc_attr( $field['id'] ) . '">';
+				$html .= '<select name="' . $option_name . '" id="' . $field['id'] . '">';
 				foreach ( $field['options'] as $k => $v ) {
 					$selected = false;
 					if ( $k == $data ) {
 						$selected = true;
 					}
-					$html .= '<option ' . selected( $selected, true, false ) . ' value="' . esc_attr( $k ) . '">' . $v . ' </option>';
+					$html .= '<option ' . selected( $selected, true, false ) . ' value="' . $k . '">' . $v . ' </option>';
 				}
 				$html .= '</select> ';
 				break;
 
 			case 'select_multi':
-				$html .= '<select name="' . esc_attr( $option_name ) . '[]" id="' . esc_attr( $field['id'] ) . '" multiple="multiple">';
+				$html .= '<select name="' . $option_name . '[]" id="' . $field['id'] . '" multiple="multiple">';
 				foreach ( $field['options'] as $k => $v ) {
 					$selected = false;
 					if ( in_array( $k, (array) $data, true ) ) {
 						$selected = true;
 					}
-					$html .= '<option ' . selected( $selected, true, false ) . ' value="' . esc_attr( $k ) . '">' . $v . '</option>';
+					$html .= '<option ' . selected( $selected, true, false ) . ' value="' . $k . '">' . $v . '</option>';
 				}
 				$html .= '</select> ';
 				break;
@@ -174,7 +174,7 @@ class CookieGenie_Admin_API {
 			case 'color':
 				//phpcs:disable
 				?><div class="color-picker" style="position:relative;">
-					<input type="text" name="<?php esc_attr_e( $option_name ); ?>" class="color" value="<?php esc_attr_e( $data ); ?>" />
+					<input type="text" name="<?php $option_name; ?>" class="color" value="<?php _e( $data ); ?>" />
 					<div style="position:absolute;background:#FFF;z-index:99;border-radius:100%;" class="colorpicker"></div>
 				</div>
 				<?php
@@ -184,9 +184,9 @@ class CookieGenie_Admin_API {
 			case 'editor':
 				wp_editor(
 					$data,
-					$option_name,
+                    $option_name,
 					array(
-						'textarea_name' => $option_name,
+						'textarea_name' =>  $option_name,
 					)
 				);
 				break;
@@ -203,7 +203,7 @@ class CookieGenie_Admin_API {
 
 			default:
 				if ( ! $post ) {
-					$html .= '<label for="' . esc_attr( $field['id'] ) . '">' . "\n";
+					$html .= '<label for="' .  $field['id'] . '">' . "\n";
 				}
 
 				$html .= '<span class="description">' . $field['description'] . '</span>' . "\n";
@@ -215,10 +215,10 @@ class CookieGenie_Admin_API {
 		}
 
 		if ( ! $echo ) {
-			return $html;
+			return wp_kses($html, $this->allowed_htmls);
 		}
 
-		echo $html; //phpcs:ignore
+        echo wp_kses($html, $this->allowed_htmls);
 
 	}
 
@@ -233,13 +233,13 @@ class CookieGenie_Admin_API {
 
 		switch ( $type ) {
 			case 'text':
-				$data = esc_attr( $data );
+				$data = esc_attr(sanitize_text_field($data));
 				break;
 			case 'url':
-				$data = esc_url( $data );
+				$data = esc_url(sanitize_url($data));
 				break;
 			case 'email':
-				$data = is_email( $data );
+				$data = is_email(sanitize_text_field($data));
 				break;
 		}
 
@@ -321,7 +321,7 @@ class CookieGenie_Admin_API {
 
 		$field = '<p class="form-field"><label for="' . $field['id'] . '">' . $field['label'] . '</label>' . $this->display_field( $field, $post, false ) . '</p>' . "\n";
 
-		echo $field; //phpcs:ignore
+		echo wp_kses($field, $this->allowed_htmls);
 	}
 
 	/**
@@ -345,12 +345,139 @@ class CookieGenie_Admin_API {
 		}
 
 		foreach ( $fields as $field ) {
-			if ( isset( $_REQUEST[ $field['id'] ] ) ) { //phpcs:ignore
-				update_post_meta( $post_id, $field['id'], $this->validate_field( $_REQUEST[ $field['id'] ], $field['type'] ) ); //phpcs:ignore
+			if ( isset( $_REQUEST[ $field['id'] ] ) ) {
+				update_post_meta( $post_id, $field['id'], $this->validate_field( $_REQUEST[ $field['id'] ], $field['type'] ) );
 			} else {
 				update_post_meta( $post_id, $field['id'], '' );
 			}
 		}
 	}
+
+
+    protected function disabled($id)
+    {
+        if($id == 'blacklist' && get_option('cg_api_key') != '')
+            return true;
+
+
+        return false;
+    }
+
+    /**
+     * Allowed html for output.
+     *
+     * @var array
+     */
+    public $allowed_htmls = [
+        'a'        => [
+            'href'  => [],
+            'title' => [],
+            'class' => [],
+        ],
+        'h1'       => [
+            'href'  => [],
+            'title' => [],
+            'class' => [],
+        ],
+        'h2'       => [
+            'href'  => [],
+            'title' => [],
+            'class' => [],
+        ],
+        'h3'       => [
+            'href'  => [],
+            'title' => [],
+            'class' => [],
+        ],
+        'h4'       => [
+            'href'  => [],
+            'title' => [],
+            'class' => [],
+        ],
+        'input'    => [
+            'id'                  => [],
+            'type'                => [],
+            'name'                => [],
+            'placeholder'         => [],
+            'value'               => [],
+            'class'               => [],
+            'checked'             => [],
+            'style'               => [],
+            'data-uploader_title' => [],
+            'data-uploader_text'  => [],
+        ],
+        'select'   => [
+            'id'          => [],
+            'type'        => [],
+            'name'        => [],
+            'multiple'    => [],
+            'style'       => [],
+            'disabled'     => [],
+        ],
+        'option'   => [
+            'id'          => [],
+            'type'        => [],
+            'name'        => [],
+            'multiple'    => [],
+            'selected'    => [],
+        ],
+        'label'    => [
+            'for'   => [],
+            'title' => [],
+        ],
+        'span'     => [
+            'class' => [],
+            'title' => [],
+        ],
+        'table'    => [
+            'scope' => [],
+            'title' => [],
+            'class' => [],
+            'role'  => [],
+        ],
+        'tbody'    => [
+            'scope' => [],
+            'title' => [],
+            'class' => [],
+            'role'  => [],
+        ],
+        'th'       => [
+            'scope' => [],
+            'title' => [],
+        ],
+        'form'     => [
+            'method'      => [],
+            'type'        => [],
+            'name'        => [],
+            'action'      => [],
+            'enctype'     => [],
+        ],
+        'div'      => [
+            'class' => [],
+            'id'    => [],
+        ],
+        'img'      => [
+            'class' => [],
+            'id'    => [],
+            'src'   => [],
+        ],
+        'textarea' => [
+            'class'       => [],
+            'id'          => [],
+            'rows'        => [],
+            'cols'        => [],
+            'name'        => [],
+            'placeholder' => [],
+            'spellcheck'  => [],
+            'disabled'    => [],
+        ],
+        'tr'       => [],
+        'td'       => [],
+        'p'        => [],
+        'br'       => [],
+        'em'       => [],
+        'strong'   => [],
+        'th'       => [],
+    ];
 
 }

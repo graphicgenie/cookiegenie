@@ -170,7 +170,7 @@ class CookieGenie_Settings {
 
         // We're including the WP media scripts here because they're needed for the image upload field.
         // If you're not including an image upload then you can leave this function call out.
-        wp_enqueue_media();
+//        wp_enqueue_media();
 
         wp_register_script($this->parent->_token . '-settings-js', $this->parent->assets_url . 'js/settings' . $this->parent->script_suffix . '.js', array('farbtastic', 'jquery'), '1.0.0', true);
         wp_enqueue_script($this->parent->_token . '-settings-js');
@@ -320,10 +320,10 @@ class CookieGenie_Settings {
             //phpcs:disable
             $current_section = '';
             if (isset($_POST['tab']) && $_POST['tab']) {
-                $current_section = $_POST['tab'];
+                $current_section = sanitize_text_field($_POST['tab']);
             } else {
                 if (isset($_GET['tab']) && $_GET['tab']) {
-                    $current_section = $_GET['tab'];
+                    $current_section = sanitize_text_field($_GET['tab']);
                 }
             }
             //phpcs:enable
@@ -377,7 +377,8 @@ class CookieGenie_Settings {
     public function settings_section($section)
     {
         $html = '<p> ' . $this->settings[$section['id']]['description'] . '</p>' . "\n";
-        echo $html; //phpcs:ignore
+
+        echo wp_kses($html, $this->allowed_htmls);
     }
 
     /**
@@ -393,11 +394,11 @@ class CookieGenie_Settings {
         $html .= '<h2>' . __('Plugin Settings', 'cookiegenie') . '</h2>' . "\n";
 
         $tab = '';
-        //phpcs:disable
+
         if (isset($_GET['tab']) && $_GET['tab']) {
-            $tab .= $_GET['tab'];
+            $tab .= sanitize_text_field($_GET['tab']);
         }
-        //phpcs:enable
+
 
         // Show page tabs.
         if (is_array($this->settings) && 1 < count($this->settings)) {
@@ -412,7 +413,7 @@ class CookieGenie_Settings {
                         $class .= ' nav-tab-active';
                     }
                 } else {
-                    if (isset($_GET['tab']) && $section == $_GET['tab']) { //phpcs:ignore
+                    if (isset($_GET['tab']) && $section == $_GET['tab']) {
                         $class .= ' nav-tab-active';
                     }
                 }
@@ -424,7 +425,7 @@ class CookieGenie_Settings {
                 }
 
                 // Output tab.
-                $html .= '<a href="' . $tab_link . '" class="' . esc_attr($class) . '">' . esc_html($data['title']) . '</a>' . "\n";
+                $html .= '<a href="' . $tab_link . '" class="' . $class . '">' . $data['title'] . '</a>' . "\n";
 
                 ++$c;
             }
@@ -441,13 +442,13 @@ class CookieGenie_Settings {
         $html .= ob_get_clean();
 
         $html .= '<p class="submit">' . "\n";
-        $html .= '<input type="hidden" name="tab" value="' . esc_attr($tab) . '" />' . "\n";
-        $html .= '<input name="Submit" type="submit" class="button-primary" value="' . esc_attr(__('Save Settings', 'cookiegenie')) . '" />' . "\n";
+        $html .= '<input type="hidden" name="tab" value="' . $tab . '" />' . "\n";
+        $html .= '<input name="Submit" type="submit" class="button-primary" value="' . __('Save Settings', 'cookiegenie') . '" />' . "\n";
         $html .= '</p>' . "\n";
         $html .= '</form>' . "\n";
         $html .= '</div>' . "\n";
 
-        echo $html; //phpcs:ignore
+        echo wp_kses($html, $this->allowed_htmls);
     }
 
     /**
@@ -488,4 +489,120 @@ class CookieGenie_Settings {
     {
         _doing_it_wrong(__FUNCTION__, esc_html(__('Unserializing instances of CookieGenie_API is forbidden.')), esc_attr($this->parent->_version));
     } // End __wakeup()
+
+    /**
+     * Allowed html for output.
+     *
+     * @var array
+     */
+    public $allowed_htmls = [
+        'a'        => [
+            'href'  => [],
+            'title' => [],
+            'class' => [],
+        ],
+        'h1'       => [
+            'href'  => [],
+            'title' => [],
+            'class' => [],
+        ],
+        'h2'       => [
+            'href'  => [],
+            'title' => [],
+            'class' => [],
+        ],
+        'h3'       => [
+            'href'  => [],
+            'title' => [],
+            'class' => [],
+        ],
+        'h4'       => [
+            'href'  => [],
+            'title' => [],
+            'class' => [],
+        ],
+        'input'    => [
+            'id'                  => [],
+            'type'                => [],
+            'name'                => [],
+            'placeholder'         => [],
+            'value'               => [],
+            'class'               => [],
+            'checked'             => [],
+            'style'               => [],
+            'data-uploader_title' => [],
+            'data-uploader_text'  => [],
+        ],
+        'select'   => [
+            'id'          => [],
+            'type'        => [],
+            'name'        => [],
+        'multiple'    => [],
+			'style'       => [],
+		],
+		'option'   => [
+        'id'          => [],
+        'type'        => [],
+        'name'        => [],
+        'multiple'    => [],
+			'selected'    => [],
+		],
+		'label'    => [
+            'for'   => [],
+            'title' => [],
+        ],
+		'span'     => [
+            'class' => [],
+            'title' => [],
+        ],
+		'table'    => [
+            'scope' => [],
+            'title' => [],
+            'class' => [],
+            'role'  => [],
+        ],
+		'tbody'    => [
+            'scope' => [],
+            'title' => [],
+            'class' => [],
+            'role'  => [],
+        ],
+		'th'       => [
+            'scope' => [],
+            'title' => [],
+        ],
+		'form'     => [
+            'method'      => [],
+            'type'        => [],
+            'name'        => [],
+            'action'      => [],
+			'enctype'     => [],
+		],
+		'div'      => [
+                'class' => [],
+                'id'    => [],
+            ],
+		'img'      => [
+                'class' => [],
+                'id'    => [],
+                'src'   => [],
+            ],
+		'textarea' => [
+                'class'       => [],
+                'id'          => [],
+                'rows'        => [],
+                'cols'        => [],
+                'name'        => [],
+                'placeholder' => [],
+                'spellcheck'  => [],
+                'disabled'  => [],
+        ],
+		'tr'       => [],
+		'td'       => [],
+		'p'        => [],
+		'br'       => [],
+		'em'       => [],
+		'strong'   => [],
+		'th'       => [],
+	];
 }

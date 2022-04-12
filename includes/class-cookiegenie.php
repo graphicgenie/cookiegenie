@@ -138,7 +138,7 @@ class CookieGenie {
         add_action('wp_enqueue_scripts', [$this, 'enqueue_scripts'], 10);
 
         // Load admin JS & CSS.
-        add_action('admin_enqueue_scripts', [$this, 'admin_enqueue_scripts'], 10, 1);
+//        add_action('admin_enqueue_scripts', [$this, 'admin_enqueue_scripts'], 10, 1);
         add_action('admin_enqueue_scripts', [$this, 'admin_enqueue_styles'], 10, 1);
 
         // Schedule Cron
@@ -151,6 +151,7 @@ class CookieGenie {
 
         // Handle localisation.
         $this->load_plugin_textdomain();
+
         add_action('init', [$this, 'load_localisation'], 0);
 
     }//end __construct()

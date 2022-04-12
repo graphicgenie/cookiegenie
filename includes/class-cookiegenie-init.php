@@ -80,14 +80,14 @@ class CookieGenie_Init {
     protected function getBannerData()
     {
         return [
-            'bck_color' => get_option('cg_bck_color'),
-            'scn_color' => get_option('cg_scn_color'),
-            'cookietitle' => get_option('cg_cookietitle'),
-            'cookietext' => get_option('cg_cookietext'),
-            'cookiedeclaration' => get_option('cg_cookiedeclaration'),
-            'readmore' => __('Read more', 'cookiegenie'),
-            'btn_disallow' => __('Only necessary cookies', 'cookiegenie'),
-            'btn_allow' => __('Allow all cookies', 'cookiegenie')
+            'bck_color' => esc_attr(get_option('cg_bck_color')),
+            'scn_color' => esc_attr(get_option('cg_scn_color')),
+            'cookietitle' => esc_html(get_option('cg_cookietitle')),
+            'cookietext' => esc_html(get_option('cg_cookietext')),
+            'cookiedeclaration' => esc_url(get_option('cg_cookiedeclaration')),
+            'readmore' => esc_html__('Read more', 'cookiegenie'),
+            'btn_disallow' => esc_html__('Only necessary cookies', 'cookiegenie'),
+            'btn_allow' => esc_html__('Allow all cookies', 'cookiegenie')
         ];
     }
 

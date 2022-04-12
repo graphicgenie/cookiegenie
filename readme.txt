@@ -1,9 +1,9 @@
 === CookieGenie ===
 Contributors: Ronald Gerssen
 Tags: wordpress, plugin, template
-Requires at least: 5.0
-Tested up to: 5.9
-Stable tag: 1.0
+Requires at least: 5.9.3
+Tested up to: 5.9.3
+Stable tag: 1.0.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -25,5 +25,5 @@ Installing "CookieGenie" can be done either by searching for "CookieGenie" via t
 == Changelog ==
 
 = 1.0.0 =
-* 2022-04-06
+* 2022-04-12
 * Initial release
