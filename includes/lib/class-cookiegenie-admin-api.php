@@ -174,7 +174,7 @@ class CookieGenie_Admin_API {
 			case 'color':
 				//phpcs:disable
 				?><div class="color-picker" style="position:relative;">
-					<input type="text" name="<?php $option_name; ?>" class="color" value="<?php _e( $data ); ?>" />
+					<input type="text" name="<?php _e($option_name); ?>" class="color" value="<?php _e( $data ); ?>" />
 					<div style="position:absolute;background:#FFF;z-index:99;border-radius:100%;" class="colorpicker"></div>
 				</div>
 				<?php
@@ -420,6 +420,7 @@ class CookieGenie_Admin_API {
             'name'        => [],
             'multiple'    => [],
             'selected'    => [],
+            'value'       => [],
         ],
         'label'    => [
             'for'   => [],

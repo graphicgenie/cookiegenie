@@ -541,11 +541,12 @@ class CookieGenie_Settings {
 			'style'       => [],
 		],
 		'option'   => [
-        'id'          => [],
-        'type'        => [],
-        'name'        => [],
-        'multiple'    => [],
+            'id'          => [],
+            'type'        => [],
+            'name'        => [],
+            'multiple'    => [],
 			'selected'    => [],
+            'value'       => [],
 		],
 		'label'    => [
             'for'   => [],
