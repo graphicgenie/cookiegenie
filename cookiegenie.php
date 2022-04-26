@@ -22,6 +22,7 @@ if (!defined('ABSPATH')) {
 }
 
 // Load plugin class files.
+require_once 'vendor/autoload.php';
 require_once 'includes/class-cookiegenie.php';
 require_once 'includes/class-cookiegenie-settings.php';
 require_once 'includes/class-cookiegenie-init.php';

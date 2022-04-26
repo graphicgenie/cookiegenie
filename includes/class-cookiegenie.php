@@ -352,6 +352,8 @@ class CookieGenie {
         if (!wp_next_scheduled('cg_update_lists'))
             wp_schedule_event(time(), 'hourly', 'cg_update_lists');
 
+        $this->cg_update_lists();
+
     }//end install()
 
 
@@ -402,6 +404,8 @@ class CookieGenie {
                 error_log($response->get_error_message());
         }
 
+        $this->createJS();
+
     }//end cg_update_lists()
 
 
@@ -420,4 +424,35 @@ class CookieGenie {
 
 
     // End _log_version_number ()
+    protected function createJS()
+    {
+        $script = file_get_contents(esc_url($this->assets_dir) . '/js/cookiegenie_helper.js');
+        $script .= "let data = " . json_encode($this->getData()) . ";
+        YETT_BLACKLIST = [];
+        data.blacklist.forEach(function (value) {
+            if(value !== '') {
+                YETT_BLACKLIST.push(new RegExp(escapeRegExp(encodeURIComponent(value))));
+            };
+        });
+        YETT_WHITELIST = [];
+        data.whitelist.forEach(function (value) {
+            if(value !== '') {
+                YETT_WHITELIST.push(new RegExp(escapeRegExp(encodeURIComponent(value))));
+            };
+        });
+        ";
+        $script .= file_get_contents(esc_url($this->assets_dir) . '/js/yett.min.js');
+
+        $minifiedCode = \JShrink\Minifier::minify($script);
+
+        file_put_contents(esc_url($this->assets_dir) . '/js/cookiegenie_init.js', $minifiedCode);
+    }
+
+    protected function getData()
+    {
+        return [
+            "blacklist" => preg_split('/\r\n|\r|\n/', esc_html(get_option('cg_blacklist'))),
+            "whitelist" => preg_split('/\r\n|\r|\n/', esc_html(get_option('cg_whitelist'))),
+        ];
+    }
 }//end class

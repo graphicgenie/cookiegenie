@@ -1,9 +1,3 @@
-/**
- * Plugin Template banner js.
- *
- *  @package WordPress Plugin Template/JS
- */
-// import Cookies from 'js-cookie'
 jQuery(document).ready(function($) {
     if(!Cookies.get("cookiegenie_consent") && !Cookies.get("cookiegenie_block"))
         $('body').append(consentBanner);
@@ -20,22 +14,22 @@ let consentBanner =
         'color:' + banner.scn_color + ';' +
     '}' +
     '.cg-btn {' +
-        'color:' + banner.scn_color + ';' +
-        'border-color:' + banner.scn_color + ';' +
+        'color:' + banner.scn_color + ' !important;' +
+        'border-color:' + banner.scn_color + ' !important;' +
     '}' +
     '#cg-image svg {' +
         'fill:' + banner.scn_color + ';' +
     '}' +
     '.cg-block-btn:hover, .cg-block-btn:focus {' +
-        'background-color:' + banner.bck_color + ';' +
-        'color:' + banner.scn_color + ';' +
+        'background-color:' + banner.bck_color + ' !important;' +
+        'color:' + banner.scn_color + ' !important;' +
     '}' +
     '#cg-text p, #cg-text h3 {' +
         'color:' + banner.scn_color + ';' +
     '}' +
     '.cg-unblock-btn, .cg-unblock-btn:hover, .cg-unblock-btn:focus {' +
-        'background-color:' + banner.scn_color + ';' +
-        'color:' + banner.bck_color + ';' +
+        'background-color:' + banner.scn_color + ' !important;' +
+        'color:' + banner.bck_color + ' !important;' +
     '}' +
     '</style>' +
     '<div id="cg-container">' +

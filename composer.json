@@ -1,18 +1,16 @@
 {
-	"name": "hlashbrooke/wordpress-plugin-template",
+	"name": "graphicgenie/cookiegenie",
 	"license": "GPL-2.0-or-later",
-	"description": "A robust code template for creating a standards-compliant WordPress plugin.",
+	"description": "CookieGenie",
 	"keywords": [
-		"wordpress", "wp", "plugin template"
+		"wordpress", "wp", "cookie block"
 	],
-	"support": {
-		"issues": "https://github.com/hlashbrooke/WordPress-Plugin-Template"
-	},
 	"require": {
 		"php": ">=7.4",
-		"squizlabs/php_codesniffer": "^3.3.1"
+		"tedivm/jshrink": "~1.0"
     },
 	"require-dev": {
+		"squizlabs/php_codesniffer": "^3.3.1",
         "wp-coding-standards/wpcs": "2.1.*"
     }
 }
