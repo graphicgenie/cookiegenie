@@ -189,7 +189,7 @@ class CookieGenie {
     {
         wp_register_script($this->_token . '-frontend', esc_url($this->assets_url) . 'js/frontend.js', ['jquery'], $this->_version, true);
         wp_enqueue_script($this->_token . '-frontend');
-        wp_localize_script($this->_token . '-frontend', 'data', ['expire' => get_option('cg_expire'), 'version' => $this->_version]);
+        wp_localize_script($this->_token . '-frontend', 'fdata', ['expire' => esc_html(get_option('cg_expire')), 'version' => $this->_version]);
 
     }//end enqueue_scripts()
 
@@ -427,6 +427,7 @@ class CookieGenie {
     protected function createJS()
     {
         $script = file_get_contents(esc_url($this->assets_dir) . '/js/cookiegenie_helper.js');
+        $script .= file_get_contents(esc_url($this->assets_dir) . '/js/js.cookie.min.js');
         $script .= "let data = " . json_encode($this->getData()) . ";
         YETT_BLACKLIST = [];
         data.blacklist.forEach(function (value) {
@@ -439,9 +440,10 @@ class CookieGenie {
             if(value !== '') {
                 YETT_WHITELIST.push(new RegExp(escapeRegExp(encodeURIComponent(value))));
             };
-        });
+        });        
         ";
         $script .= file_get_contents(esc_url($this->assets_dir) . '/js/yett.min.js');
+        $script .= "if(Cookies.get('cookiegenie_consent')) { window.yett.unblock(); };";
 
         $minifiedCode = \JShrink\Minifier::minify($script);
 

@@ -4,7 +4,7 @@ Contributors: Ronald Gerssen
 Tags: wordpress, plugin, cookies  
 Requires at least: 5.9.3
 Tested up to: 5.9.3
-Stable tag: 1.0.0  
+Stable tag: 1.0.1  
 License: GPLv2 or later  
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -24,6 +24,11 @@ Installing "CookieGenie" can be done either by searching for "CookieGenie" via t
 3. Activate the plugin through the 'Plugins' menu in WordPress
 
 ##### Changelog
+* 1.0.1
+* 2022-04-26
+* Bug fixes related to cache
+
+
 * 1.0.0
 * 2022-04-06
 * Initial release

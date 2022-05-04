@@ -7,9 +7,7 @@
   </component>
   <component name="PhpIncludePathManager">
     <include_path>
-      <path value="$PROJECT_DIR$/vendor/squizlabs/php_codesniffer" />
       <path value="$PROJECT_DIR$/vendor/composer" />
-      <path value="$PROJECT_DIR$/vendor/wp-coding-standards/wpcs" />
       <path value="$PROJECT_DIR$/vendor/tedivm/jshrink" />
     </include_path>
   </component>

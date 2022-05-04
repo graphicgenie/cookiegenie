@@ -33,16 +33,14 @@ class CookieGenie_Init {
         $this->parent = $parent;
 
         if (get_option('cg_enabled')) {
-            // enqueue scripts if user hasn't consent yet
-            if ($this->askConsent()) {
-                add_action('wp_head', array($this, 'enqueueScripts'), -99999);
-                add_action('wp_enqueue_scripts', array($this, 'renderCookieConsent'), 1000);
-            }
 
-            if (isset($_COOKIE['cookiegenie_block'])) {
+            // enqueue scripts if user hasn't consent yet
+            if ($this->askConsent())
                 add_action('wp_head', array($this, 'enqueueScripts'), -99999);
-                // TODO: load banner to change settings
-            }
+
+            if(!isset($_COOKIE['cookiegenie_consent']) && !isset($_COOKIE['cookiegenie_block']))
+                add_action('wp_enqueue_scripts', array($this, 'renderCookieConsent'), 1000);
+
         }
     }
 
@@ -54,7 +52,6 @@ class CookieGenie_Init {
 
     public function renderCookieConsent()
     {
-        wp_enqueue_script($this->parent->_token . '-cookie', esc_url($this->parent->assets_url) . 'js/js.cookie.min.js', '', '3.0.1');
         wp_enqueue_script($this->parent->_token . '-cgb', esc_url($this->parent->assets_url) . 'js/banner.js', array('jquery'), $this->parent->_version);
         wp_localize_script($this->parent->_token . '-cgb', 'banner', $this->getBannerData());
     }

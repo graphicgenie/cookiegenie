@@ -597,6 +597,7 @@ class CookieGenie_Settings {
                 'placeholder' => [],
                 'spellcheck'  => [],
                 'disabled'  => [],
+                'readonly' => [],
         ],
 		'tr'       => [],
 		'td'       => [],

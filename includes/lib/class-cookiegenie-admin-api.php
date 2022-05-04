@@ -105,7 +105,7 @@ class CookieGenie_Admin_API {
 				break;
 
 			case 'textarea':
-				$html .= '<textarea id="' . $field['id'] . '" rows="5" cols="50" ' . disabled($this->disabled($field['id']), true, false) . ' name="' . $option_name . '" placeholder="' . $field['placeholder'] . '">' . $data . '</textarea><br/>' . "\n";
+				$html .= '<textarea id="' . $field['id'] . '" rows="5" cols="50" ' . wp_readonly($this->disabled($field['id']), true, false) . ' name="' . $option_name . '" placeholder="' . $field['placeholder'] . '">' . $data . '</textarea><br/>' . "\n";
 				break;
 
 			case 'checkbox':
@@ -471,6 +471,7 @@ class CookieGenie_Admin_API {
             'placeholder' => [],
             'spellcheck'  => [],
             'disabled'    => [],
+            'readonly'    => [],
         ],
         'tr'       => [],
         'td'       => [],
