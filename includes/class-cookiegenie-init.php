@@ -40,7 +40,7 @@ class CookieGenie_Init
                 add_action('wp_head', array($this, 'enqueueScripts'), -99999);
             else {
                 add_action('wp_head', array($this, 'enqueueConsentScripts'), -99999);
-                add_action('wp_enqueue_scripts', array($this, 'enqueueGoogleConsentScripts'), 20);
+                add_action('wp_enqueue_scripts', array($this, 'enqueueGoogleConsentScripts'), 100);
             }
 
             if (!isset($_COOKIE['cookiegenie_consent']) && !isset($_COOKIE['cookiegenie_block']))

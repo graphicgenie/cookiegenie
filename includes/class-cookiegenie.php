@@ -436,7 +436,6 @@ class CookieGenie {
     {
         $script = file_get_contents(esc_url($this->assets_dir) . '/js/cookiegenie_helper.js');
         $script .= file_get_contents(esc_url($this->assets_dir) . '/js/js.cookie.min.js');
-        $script .= file_get_contents(esc_url($this->assets_dir) . '/js/googleConsent.js');
         $script .= "let data = " . json_encode($this->getData()) . ";
         YETT_BLACKLIST = [];
         data.blacklist.forEach(function (value) {
@@ -460,13 +459,6 @@ class CookieGenie {
         });
         ";
         $script .= file_get_contents(esc_url($this->assets_dir) . '/js/yett.min.js');
-        $script .= "if(Cookies.get('cookiegenie_consent')) {";
-            $script .= "window.yett.unblock();";
-            esc_html(get_option('cg_ad_storage')) == 'on' ?? $script .= "consentAdStorage()";
-            esc_html(get_option('cg_ad_user_data')) == 'on' ?? $script .= "consentAdUserData()";
-            esc_html(get_option('cg_ad_personalization')) == 'on' ?? $script .= "consentAdPersonalization()";
-            esc_html(get_option('cg_analytics_storage')) == 'on' ?? $script .= "consentAnalyticsStorage()";
-        $script .= "};";
 
         $minifiedCode = \JShrink\Minifier::minify($script);
 
