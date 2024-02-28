@@ -189,7 +189,14 @@ class CookieGenie {
     {
         wp_register_script($this->_token . '-frontend', esc_url($this->assets_url) . 'js/frontend.js', ['jquery'], $this->_version, true);
         wp_enqueue_script($this->_token . '-frontend');
-        wp_localize_script($this->_token . '-frontend', 'fdata', ['expire' => esc_html(get_option('cg_expire')), 'version' => $this->_version]);
+        wp_localize_script($this->_token . '-frontend', 'fdata', [
+            'expire' => esc_html(get_option('cg_expire')),
+            'version' => $this->_version,
+            'ad_storage' => esc_html(get_option('cg_ad_storage')),
+            'ad_user_data' => esc_html(get_option('cg_ad_user_data')),
+            'ad_personalization' => esc_html(get_option('cg_ad_personalization')),
+            'analytics_storage' => esc_html(get_option('cg_analytics_storage')),
+        ]);
 
     }//end enqueue_scripts()
 
@@ -348,6 +355,7 @@ class CookieGenie {
         update_option('cg_cookietext', 'We use cookies to make our website function properly, to improve it, to enable social media functions and to analyze traffic to our website. This information is also shared with our social media and analytics partners. More information about this can be found in our Cookie Statement.');
         update_option('cg_bck_color', '#1F3163');
         update_option('cg_scn_color', '#FFFFFF');
+        update_option('cg_analytics_storage', 'on');
 
         if (!wp_next_scheduled('cg_update_lists'))
             wp_schedule_event(time(), 'hourly', 'cg_update_lists');
@@ -397,7 +405,7 @@ class CookieGenie {
             ];
             $response = wp_remote_get('https://cookiegenie.ggcloud.nl/api?domain=' . $domain, $args);
 
-            if (is_array($response) && !isset($response['errors']))
+            if (is_array(unserialize($response['body'])) && !isset($response['errors']))
                 update_option('cg_blacklist', implode(PHP_EOL, unserialize($response['body'])));
 
             if (is_wp_error($response))
@@ -428,6 +436,7 @@ class CookieGenie {
     {
         $script = file_get_contents(esc_url($this->assets_dir) . '/js/cookiegenie_helper.js');
         $script .= file_get_contents(esc_url($this->assets_dir) . '/js/js.cookie.min.js');
+        $script .= file_get_contents(esc_url($this->assets_dir) . '/js/googleConsent.js');
         $script .= "let data = " . json_encode($this->getData()) . ";
         YETT_BLACKLIST = [];
         data.blacklist.forEach(function (value) {
@@ -440,10 +449,24 @@ class CookieGenie {
             if(value !== '') {
                 YETT_WHITELIST.push(new RegExp(escapeRegExp(encodeURIComponent(value))));
             };
-        });        
+        });
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('consent', 'default', {
+          'ad_storage': 'denied', 
+          'ad_user_data': 'denied',
+          'ad_personalization': 'denied',
+          'analytics_storage': 'denied'
+        });
         ";
         $script .= file_get_contents(esc_url($this->assets_dir) . '/js/yett.min.js');
-        $script .= "if(Cookies.get('cookiegenie_consent')) { window.yett.unblock(); };";
+        $script .= "if(Cookies.get('cookiegenie_consent')) {";
+            $script .= "window.yett.unblock();";
+            esc_html(get_option('cg_ad_storage')) == 'on' ?? $script .= "consentAdStorage()";
+            esc_html(get_option('cg_ad_user_data')) == 'on' ?? $script .= "consentAdUserData()";
+            esc_html(get_option('cg_ad_personalization')) == 'on' ?? $script .= "consentAdPersonalization()";
+            esc_html(get_option('cg_analytics_storage')) == 'on' ?? $script .= "consentAnalyticsStorage()";
+        $script .= "};";
 
         $minifiedCode = \JShrink\Minifier::minify($script);
 

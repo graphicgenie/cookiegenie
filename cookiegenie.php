@@ -1,13 +1,13 @@
 <?php
 /**
  * Plugin Name: CookieGenie
- * Version: 1.0.1
+ * Version: 1.0.8
  * Plugin URI: https://www.graphicgenie.nl/cookiegenie
  * Description: Ask user for permission before loading analytics and tracking scripts and cookies.
  * Author: Ronald Gerssen - GraphicGenie
  * Author URI: https://www.graphicgenie.nl
- * Requires at least: 5.9.3
- * Tested up to: 5.9.3
+ * Requires at least: 6.4.3
+ * Tested up to: 6.0
  *
  * Text Domain: cookiegenie
  * Domain Path: /lang/
@@ -32,7 +32,7 @@ require_once 'includes/lib/class-cookiegenie-admin-api.php';
 
 function cookiegenie()
 {
-    $instance = CookieGenie::instance(__FILE__, '1.0.1');
+    $instance = CookieGenie::instance(__FILE__, '1.0.8');
 
     if (is_null($instance->settings)) {
         $instance->settings = CookieGenie_Settings::instance($instance);

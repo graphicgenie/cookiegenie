@@ -8,7 +8,8 @@
 if (!defined('ABSPATH'))
     exit;
 
-class CookieGenie_Init {
+class CookieGenie_Init
+{
 
     /**
      * The single instance of CookieGenie_Settings.
@@ -37,11 +38,31 @@ class CookieGenie_Init {
             // enqueue scripts if user hasn't consent yet
             if ($this->askConsent())
                 add_action('wp_head', array($this, 'enqueueScripts'), -99999);
+            else {
+                add_action('wp_head', array($this, 'enqueueConsentScripts'), -99999);
+                add_action('wp_enqueue_scripts', array($this, 'enqueueGoogleConsentScripts'), 20);
+            }
 
-            if(!isset($_COOKIE['cookiegenie_consent']) && !isset($_COOKIE['cookiegenie_block']))
+            if (!isset($_COOKIE['cookiegenie_consent']) && !isset($_COOKIE['cookiegenie_block']))
                 add_action('wp_enqueue_scripts', array($this, 'renderCookieConsent'), 1000);
 
         }
+    }
+
+    public function enqueueConsentScripts()
+    {
+        $init_script = esc_url($this->parent->assets_url) . 'js/cookiegenie_consent.js';
+        include(esc_url($this->parent->assets_dir) . '/scripts/cookiegenie-script.php');
+    }
+
+    public function enqueueGoogleConsentScripts() {
+        wp_enqueue_script(
+            $this->parent->_token . '-frontendGc',
+            esc_url($this->parent->assets_url) . '/js/googleConsent.js',
+            array('jquery'),
+            $this->parent->_version,
+            true
+        );
     }
 
     public function enqueueScripts()

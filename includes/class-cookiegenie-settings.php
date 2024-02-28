@@ -287,18 +287,51 @@ class CookieGenie_Settings {
                     'default' => '#FFFFFF',
                 ),
             ),
-            $settings['license'] = array(
-                'title' => __('API', 'cookiegenie'),
-                'description' => __('', 'cookiegenie'),
-                'fields' => array(
-                    array(
-                        'id' => 'api_key',
-                        'label' => __('API Key', 'cookiegenie'),
-                        'description' => __('Get your API key at https://www.graphicgenie.nl/cookiegenie', 'cookiegenie'),
-                        'type' => 'password',
-                        'default' => '',
-                        'placeholder' => __('Your API key', 'cookiegenie'),
-                    ),
+        );
+
+        $settings['license'] = array(
+            'title' => __('API', 'cookiegenie'),
+            'description' => __('', 'cookiegenie'),
+            'fields' => array(
+                array(
+                    'id' => 'api_key',
+                    'label' => __('API Key', 'cookiegenie'),
+                    'description' => __('Get your API key at https://www.graphicgenie.nl/cookiegenie', 'cookiegenie'),
+                    'type' => 'password',
+                    'default' => '',
+                    'placeholder' => __('Your API key', 'cookiegenie'),
+                ),
+            ),
+        );
+
+        $settings['google_csm'] = array(
+            'title' => __('Google CSM', 'cookiegenie'),
+            'description' => __('When option is enabled it will be \'granted\' when user allows for cookies', 'cookiegenie'),
+            'fields' => array(
+                array(
+                    'id' => 'ad_storage',
+                    'label' => __('Enable ad_storage', 'cookiegenie'),
+                    'description' => __('', 'cookiegenie'),
+                    'type' => 'checkbox',
+                ),
+                array(
+                    'id' => 'ad_user_data',
+                    'label' => __('Enable ad_user_data', 'cookiegenie'),
+                    'description' => __('', 'cookiegenie'),
+                    'type' => 'checkbox',
+                ),
+                array(
+                    'id' => 'ad_personalization',
+                    'label' => __('Enable ad_personalization', 'cookiegenie'),
+                    'description' => __('', 'cookiegenie'),
+                    'type' => 'checkbox',
+                ),
+                array(
+                    'id' => 'analytics_storage',
+                    'label' => __('Enable analytics_storage', 'cookiegenie'),
+                    'description' => __('', 'cookiegenie'),
+                    'type' => 'checkbox',
+                    'default' => 'on'
                 ),
             ),
         );
